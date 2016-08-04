@@ -1,0 +1,20 @@
+.new{
+  .background-new{
+    background-image: asset-url("pineapple.jpg");
+    height: 50vh;
+    width: 100%;
+    background-position: 100% 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .font-feature-new {
+    margin:10px;
+    color: black;
+    font-size: 20px;
+    justify-content: center;
+  }
+}

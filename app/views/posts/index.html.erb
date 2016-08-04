@@ -1,0 +1,25 @@
+<div class="topics posts">
+  <div class="background">
+    <h1 style="color: white; font-size: 50px">Posts</h1>
+  </div>
+
+  <div style="margin: 30px" class="form-group text-center">
+    <%= link_to "Add new post", new_topic_post_path, class: "btn btn-success btn-lg" %>
+  </div>
+
+  <div class="post-array text-center">
+      <% @posts.each do |post| %>
+
+    <div class="post-item">
+      <h3 class="font-feature-1"><%= post.title %></h3>
+      <h5 class="font-feature-2"><%= post.body %></h5>
+      <%= link_to post.title, topic_post_path(@topic, @post), class: "btn btn-primary" %>
+      <div style="margin: 5px" class="edit-post">
+        <%= link_to "Edit #{post.title}", edit_topic_path(post), class: "btn btn-primary" %>
+      </div>
+    </div>
+    <% end %>
+  </div>
+
+
+</div>

@@ -1,0 +1,12 @@
+<div class="posts show">
+  <div class="background-show text-center">
+    <h1 style="color: white"><%= @topic.title %></h1>
+  </div>
+
+  <div class="content-show text-center">
+    <p class="font-feature-show">Description: <%= @topic.description %></p>
+    <%= link_to "Back to all topics", topics_path, class: "btn btn-success btn-lg"%>
+    <%= link_to "Delete", topic_path(@topic), method: :delete, class: "btn btn-danger btn-lg", data: { confirm: "Delete?"} %>
+  </div>
+
+</div>

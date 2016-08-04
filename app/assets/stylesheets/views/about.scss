@@ -1,0 +1,66 @@
+.about{
+  .background-about {
+    background-image: asset-url("aboutbackground.jpg");
+    height: 50vh;
+    width: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 50px auto;
+  }
+
+  .content-about{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .images{
+    width: 100%;
+    // margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+
+  }
+
+  .image{
+    flex: 0 0 280px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    &:hover .invisible-layout {
+      opacity: 1;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+  .image-profile{
+    flex: 0 0 280px;
+    position: relative;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+  .image-box{
+    width:100%;
+    height: 200px;
+  }
+
+  @media all and (max-width: 1199px){
+    .features{
+      max-width: 600px;
+    }
+    .image{
+      flex: 0 0 50%;
+    }
+  }
+  @media all and (max-width: 600px){
+    .image{
+      flex: 0 0 100%;
+    }
+  }
+}

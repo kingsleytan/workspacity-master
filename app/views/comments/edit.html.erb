@@ -1,0 +1,30 @@
+<div class="edit">
+
+  <div class="background-edit">
+    <h1 style="color: black">Edit: <%= @comment.title %></h1>
+  </div>
+
+  <div class="form-edit">
+    <%= form_for(@comment, url: comment_path(@comment), html: { id: "comment-update-form" }) do |f| %>
+    <h1 class="text-center">
+      Update Your Comment Here
+    </h1>
+
+    <div class="form-group">
+      <h4> <%= f.label :title_field, "Title" %> </h4>
+      <%= f.text_field :title, required: true, id: "comment_title_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <h4> <%= f.label :text_field, "Body" %> </h4>
+      <%= f.text_field :body, id: "comment_body_field", class: 'form-control' %>
+    </div>
+
+    <div class="font-feature-edit text-center">
+      <%= link_to "Back to all comments", comments_path, class: "btn btn-success btn-lg"%>
+      <%= f.submit "Update Comment", class: "btn btn-success btn-lg", data:{ confirm: "Edit?" } %>
+    </div>
+    <% end %>
+  </div>
+
+</div>

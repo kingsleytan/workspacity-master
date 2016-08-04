@@ -1,0 +1,30 @@
+<div class="edit">
+
+  <div class="background-edit">
+    <h1 style="color: black">Edit: <%= @topic.title %></h1>
+  </div>
+
+  <div class="form-edit">
+    <%= form_for(@topic, url: topic_path(@topic), html: { id: "topic-update-form" }) do |f| %>
+    <h1 class="text-center">
+      Update Your Topic Here
+    </h1>
+
+    <div class="form-group">
+      <h4> <%= f.label :title_field, "Title" %> </h4>
+      <%= f.text_field :title, required: true, id: "topic_title_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <h4> <%= f.label :text_field, "Description" %> </h4>
+      <%= f.text_field :description, id: "topic_description_field", class: 'form-control' %>
+    </div>
+
+    <div class="font-feature-edit text-center">
+      <%= link_to "Back to all topics", topics_path, class: "btn btn-success btn-lg"%>
+      <%= f.submit "Update Topic", class: "btn btn-success btn-lg", data:{ confirm: "Edit?" } %>
+    </div>
+    <% end %>
+  </div>
+
+</div>

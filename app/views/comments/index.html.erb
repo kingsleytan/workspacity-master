@@ -1,0 +1,27 @@
+<div class="comments">
+  <div class="background">
+    <h1 style="color: white; font-size: 50px">Comments</h1>
+  </div>
+
+  <div style="margin: 30px" class="form-group text-center">
+    <%= link_to "Add new comment", new_comment_path, class: "btn btn-success btn-lg" %>
+  </div>
+
+  <div class="comment-array text-center">
+    <% @comments.each do |comment| %>
+
+    <div class="comment-item">
+      <h3 class="font-feature-1"><%= comment.title %></h3>
+      <h5 class="font-feature-2"><%= comment.body %></h5>
+      <%= link_to comment.title, comment_path(comment), class: "btn btn-primary" %>
+      <div style="margin: 5px" class="edit-comment">
+        <%= link_to "Edit #{comment.title}", edit_comment_path(comment), class: "btn btn-primary" %>
+      </div>
+    </div>
+
+
+    <% end %>
+  </div>
+
+
+</div>

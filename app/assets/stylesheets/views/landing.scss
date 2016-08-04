@@ -1,0 +1,171 @@
+.landing{
+  .background {
+    background-image: asset-url("Camera.jpg");
+    // height: 100vh;
+    height: calc(100vh - 52px);
+    width: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .background-2{
+    background-image: asset-url("whiterose.jpg");
+    height: 50vh;
+    width: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .background-3{
+    background-color: #0ABAB5;
+    height: 50vh;
+    width: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .background-4{
+    background-color: #d9e6f2;
+    height: 50vh;
+    width: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content-main-about{
+    width: 80%;
+
+  }
+
+  .features{
+    max-width: 1200px;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .feature{
+    flex: 0 0 280px;
+    margin: 20px 10px
+  }
+
+  .feature-title{
+    font-size: 30px;
+    justify-content: center;
+  }
+
+  .font-feature-1 {
+    color: black;
+    font-size: 10px;
+    justify-content: center;
+  }
+
+  .font-feature-2 {
+    color: black;
+    font-size: 20px;
+    justify-content: center;
+  }
+
+  .font-feature-main-about{
+    color: white;
+    font-size: 15px;
+    justify-content: center;
+  }
+
+  .images{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+  }
+
+
+  .image{
+    flex: 0 0 25%;
+    position: relative;
+    &:hover .invisible-layout {
+      opacity: 1;
+      transition: all 0.3s ease-in-out;
+    }
+  }
+
+  .image-box{
+    width:100%;
+    height: 200px;
+  }
+
+  .invisible-layout{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    opacity: 0;
+  }
+
+  .content-hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    background-color: yellow;
+    opacity: 0.5;
+  }
+
+  .short-underline {
+    width: 50px;
+    border-bottom: 2px solid orange;
+  }
+
+  .button {
+    background-color: #0ABAB5;
+    border: none;
+    color: #555555;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+  }
+  .button:hover {
+    background-color: #008CBA;
+    color: white;
+  }
+
+  @media all and (max-width: 1199px){
+    .features{
+      max-width: 600px;
+    }
+    .image{
+      flex: 0 0 50%;
+    }
+  }
+
+  @media all and (max-width: 600px){
+    .image{
+      flex: 0 0 100%;
+    }
+  }
+}
