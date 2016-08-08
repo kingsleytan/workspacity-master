@@ -27,8 +27,9 @@ class PostsController < ApplicationController
   end
 
   def update
-    @topic = Topic.find_by(id: params[:topic_id])
+
     @post = Post.find_by(id: params[:id])
+    @topic = @post.topic
 
     if @post.update(post_params)
       redirect_to topic_posts_path(@topic)
@@ -49,6 +50,6 @@ class PostsController < ApplicationController
   private
 
     def post_params
-      params.require(:post).permit(:title, :body)
+      params.require(:post).permit(:image, :title, :body)
     end
 end

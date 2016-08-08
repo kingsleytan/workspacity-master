@@ -13,9 +13,9 @@
     <div class="topic-item">
       <h3 class="font-feature-1"><%= topic.title %></h3>
       <h5 class="font-feature-2"><%= topic.description %></h5>
-      <%= link_to topic.title, topic_posts_path(topic), class: "btn btn-primary" %>
+      <%= link_to "View: #{topic.title}", topic_posts_path(topic), class: "btn btn-primary" %>
       <div style="margin: 5px" class="edit-topic">
-        <%= link_to "Edit #{topic.title}", edit_topic_path(topic), class: "btn btn-primary" %>
+        <%= link_to "Edit: #{topic.title}", edit_topic_path(topic), class: "btn btn-primary" %>
       </div>
     </div>
 

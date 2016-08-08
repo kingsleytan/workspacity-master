@@ -1,25 +1,35 @@
 <div class="topics posts">
   <div class="background">
-    <h1 style="color: white; font-size: 50px">Posts</h1>
+    <h1 style="color: white; font-size: 50px"> Posts of <%=@topic.title%></h1>
   </div>
 
   <div style="margin: 30px" class="form-group text-center">
+    <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
     <%= link_to "Add new post", new_topic_post_path, class: "btn btn-success btn-lg" %>
+    <%= link_to "Delete Topic", topic_path(@topic), method: :delete, class: "btn btn-danger btn-lg", data: { confirm: "Delete?"} %>
   </div>
 
-  <div class="post-array text-center">
-      <% @posts.each do |post| %>
 
+
+  <div class="post-array text-center">
+    <% @posts.each do |post| %>
+    <div class="form-group">
+      <h4 class="text-center"> Post Image </h4>
+      <div id="a">
+        <% if post.image? %>
+          <%= image_tag post.image, class: "img-settings img-responsive center-block" %>
+        <% end %>
+      </div>
+    </div>
+    
     <div class="post-item">
       <h3 class="font-feature-1"><%= post.title %></h3>
       <h5 class="font-feature-2"><%= post.body %></h5>
-      <%= link_to post.title, topic_post_path(@topic, @post), class: "btn btn-primary" %>
+      <%= link_to post.title, topic_post_comments_path(@topic,post), class: "btn btn-primary" %>
       <div style="margin: 5px" class="edit-post">
-        <%= link_to "Edit #{post.title}", edit_topic_path(post), class: "btn btn-primary" %>
+        <%= link_to "Edit #{post.title}", edit_topic_post_path(@topic, post), class: "btn btn-primary" %>
       </div>
     </div>
     <% end %>
   </div>
-
-
 </div>

@@ -2,10 +2,7 @@
   <div class="background-new">
     <h1 style="color: black">Create Comment</h1>
   </div>
-  <%= form_for(@comment, url: comments_path, html: { id: "comment-create-form" }) do |f| %>
-    <div class="form-group">
-      <h4> <%= f.label :post_title, "Title" %> </h4>
-    </div>
+  <%= form_for(@comment, url: topic_post_comments_path(@topic, @post), html: { id: "comment-create-form" }) do |f| %>
 
     <div class="form-group">
       <h4> <%= f.label :text_field, "Description" %> </h4>
@@ -13,7 +10,7 @@
     </div>
 
     <div class="font-feature-new text-center">
-      <%= link_to "Back to all comments", comments_path, class: "btn btn-success btn-lg"%>
+      <%= link_to "Back to all topics", topics_path, class: "btn btn-success btn-lg"%>
       <%= f.submit "Create Comment", class: "btn btn-success btn-lg" %>
     </div>
   <% end %>

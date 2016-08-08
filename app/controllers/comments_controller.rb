@@ -1,54 +1,65 @@
 class CommentsController < ApplicationController
 
   def index
-    @comments = Comment.all.order(created_at: :desc)
-  end
-
-  def show
-    @comment = Comment.find_by(id: params[:id])
-
+    @post = Post.includes(:comments).find_by(id: params[:post_id])
+    @topic = @post.topic
+    @comments = @post.comments.order("created_at DESC")
   end
 
   def new
+
+    @post = Post.find_by(id: params[:post_id])
+    @topic = @post.topic
     @comment = Comment.new
   end
 
   def create
-    @comment = Comment.new(comment_params)
+
+    @post = Post.find_by(id: params[:post_id])
+    @topic = @post.topic
+    @comment = Comment.new(comment_params.merge(post_id: params[:post_id]))
 
     if @comment.save
-      redirect_to comments_path
+      redirect_to topic_post_comments_path(@topic,@post)
     else
-      render new_comment_path
+      render :new
     end
   end
 
   def edit
-     @comment = Comment.find_by(id: params[:id])
+
+    @post = Post.find_by(id: params[:post_id])
+    @topic = @post.topic
+    @comment = Comment.find_by(id: params[:id])
   end
 
   def update
+
+    @post = Post.find_by(id: params[:post_id])
+    @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
 
     if @comment.update(comment_params)
-      redirect_to comment_path(@comment)
+      redirect_to topic_post_comments_path(@topic,@post)
     else
-      redirect_to edit_comment_path(@comment)
+      redirect_to edit_topic_post_comment_path(@topic, @post, @comment)
     end
   end
 
   def destroy
+    @post = Post.find_by(id: params[:post_id])
+    @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
-    if @comment.destroy
-      redirect_to comments_path
-    else
-      redirect_to comment_path(@comment)
-    end
-  end
+
+     if @comment.destroy
+       redirect_to topic_post_comments_path(@topic, @post)
+     end
+   end
+
 
   private
 
-    def comment_params
-      params.require(:comment).permit(:title, :description)
-    end
+  def comment_params
+    params.require(:comment).permit(:image, :body)
+  end
 end

@@ -1,7 +1,7 @@
 <div class="edit">
 
   <div class="background-edit">
-    <h1 style="color: black">Edit: <%= @topic.title %></h1>
+    <h1 style="color: black"> Edit: <%= @topic.title %></h1>
   </div>
 
   <div class="form-edit">
@@ -21,8 +21,9 @@
     </div>
 
     <div class="font-feature-edit text-center">
-      <%= link_to "Back to all topics", topics_path, class: "btn btn-success btn-lg"%>
-      <%= f.submit "Update Topic", class: "btn btn-success btn-lg", data:{ confirm: "Edit?" } %>
+      <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
+      <%= f.submit "Update Topic", class: "btn btn-success btn-lg" %>
+      <%= link_to "Delete Topic", topic_path(@topic), method: :delete, class: "btn btn-danger btn-lg", data: { confirm: "Delete?"} %>
     </div>
     <% end %>
   </div>

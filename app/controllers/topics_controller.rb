@@ -12,14 +12,16 @@ class TopicsController < ApplicationController
     @topic = Topic.new(topic_params)
 
     if @topic.save
+      flash[:success] = "You've created a new topic."
       redirect_to topics_path
     else
-      render new_topic_path
+      flash[:danger] = @topic.errors.full_messages
+      redirect_to new_topic_path
     end
   end
 
   def edit
-     @topic = Topic.find_by(id: params[:id])
+    @topic = Topic.find_by(id: params[:id])
   end
 
   def update
@@ -41,9 +43,11 @@ class TopicsController < ApplicationController
     end
   end
 
+
+
   private
 
-    def topic_params
-      params.require(:topic).permit(:title, :description)
-    end
+  def topic_params
+    params.require(:topic).permit(:title, :description)
+  end
 end
