@@ -1,0 +1,33 @@
+<div class="new">
+  <div class="background-new">
+    <h1 style="color: black">Sign up</h1>
+  </div>
+
+  <%= form_for(@user, url: users_path, html: { id: "user-create-form" }) do |f| %>
+    <div class="form-group">
+      <h4> <%= f.label :username_field, "Username" %> </h4>
+      <%= f.text_field :username, required: true, id: "user_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <h4> <%= f.label :text_field, "Email" %> </h4>
+      <%= f.text_field :email, id: "email_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <h4> <%= f.label :password %> </h4>
+      <%= f.password_field :password, id: "password_field", class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <h4> <%= f.label :password_confirmation %> </h4>
+      <%= f.password_field :password_confirmation, id: "password_field", class: 'form-control' %>
+    </div>
+
+    <div class="font-feature-new text-center">
+      <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
+      <%= f.submit "Create Account", class: "btn btn-success btn-lg" %>
+    </div>
+  <% end %>
+
+</div>

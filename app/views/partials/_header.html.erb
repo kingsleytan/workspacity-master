@@ -15,6 +15,30 @@
         <ul class="nav navbar-nav navbar-right">
           <li><%= link_to "About", about_path %></li>
           <li><%= link_to "Topic", topics_path %></li>
+
+          <% if current_user %>
+              <li>
+                <%= link_to "Welcome, #{current_user.username}", edit_user_path(current_user), class: 'white shadowed link-styling' %>
+              </li>
+
+              <li>
+                <%= link_to "Logout", session_path(current_user), method: :delete, class: 'white shadowed link-styling' %>
+              </li>
+
+            <% else %>
+
+              <li>
+                <%= link_to "Register", new_user_path, class: 'white shadowed link-styling' %>
+              </li>
+
+              <li>
+                <%= link_to "Login", new_session_path, class: 'white shadowed link-styling' %>
+              </li>
+
+              <li>
+                <%= link_to "Reset Password", new_password_reset_path, class: 'white shadowed link-styling' %>
+              </li>
+            <% end %>
         </ul>
       </div>
     </div>

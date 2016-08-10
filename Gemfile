@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+group :development do
+    gem 'letter_opener'
+  end
+
 gem 'figaro'
 
 gem 'mini_magick'

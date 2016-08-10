@@ -13,9 +13,8 @@ class UsersController < ApplicationController
 
     if @user.save
       flash[:success] = "You've created a new user."
-      redirect_to users_path
+      redirect_to root_path
     else
-      flash[:danger] = @user.errors.full_messages
       redirect_to new_user_path
     end
   end
@@ -30,13 +29,13 @@ class UsersController < ApplicationController
       redirect_to edit_user_path(@user)
     end
   end
-end
+
 
 
 private
 
 def user_params
-  params.require(:user).permit(:email, :password, :image, :username)
+  params.require(:user).permit(:email, :password, :image, :username, :password_confirmation)
 end
 
 end

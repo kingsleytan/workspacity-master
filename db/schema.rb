@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809032826) do
+ActiveRecord::Schema.define(version: 20160810031408) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20160809032826) do
     t.datetime "updated_at", null: false
     t.integer  "post_id"
     t.string   "image"
+    t.integer  "user_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -30,6 +31,7 @@ ActiveRecord::Schema.define(version: 20160809032826) do
     t.datetime "updated_at", null: false
     t.integer  "topic_id"
     t.string   "image"
+    t.integer  "user_id"
   end
 
   create_table "topics", force: :cascade do |t|
@@ -37,6 +39,7 @@ ActiveRecord::Schema.define(version: 20160809032826) do
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -44,8 +47,10 @@ ActiveRecord::Schema.define(version: 20160809032826) do
     t.string   "password_digest"
     t.string   "username"
     t.string   "image"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
+    t.string   "password_reset_token"
+    t.datetime "password_reset_at"
   end
 
 end
