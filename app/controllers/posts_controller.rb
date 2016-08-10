@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
 
   def index
     @topic = Topic.includes(:posts).find_by(id: params[:topic_id])
@@ -24,8 +25,9 @@ class PostsController < ApplicationController
   end
 
   def edit
-     @post = Post.find_by(id: params[:id])
-     @topic = @post.topic
+    @post = Post.find_by(id: params[:id])
+    @topic = @post.topic
+    authorize @post
   end
 
   def update
@@ -43,7 +45,7 @@ class PostsController < ApplicationController
   def destroy
     @post = Post.find_by(id: params[:id])
     @topic = @post.topic
-
+    authorize @post
     if @post.destroy
       redirect_to topic_posts_path(@topic)
     end
@@ -51,7 +53,7 @@ class PostsController < ApplicationController
 
   private
 
-    def post_params
-      params.require(:post).permit(:image, :title, :body)
-    end
+  def post_params
+    params.require(:post).permit(:image, :title, :body)
+  end
 end

@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem "pundit"
+
 group :development do
     gem 'letter_opener'
   end

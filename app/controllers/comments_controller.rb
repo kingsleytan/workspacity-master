@@ -1,5 +1,5 @@
 class CommentsController < ApplicationController
-
+before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
   def index
     @post = Post.includes(:comments).find_by(id: params[:post_id])
     @topic = @post.topic
@@ -33,6 +33,7 @@ class CommentsController < ApplicationController
     @post = Post.find_by(id: params[:post_id])
     @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
+    authorize @comment
   end
 
   def update
@@ -52,7 +53,7 @@ class CommentsController < ApplicationController
     @post = Post.find_by(id: params[:post_id])
     @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
-
+    authorize @comment
      if @comment.destroy
        redirect_to topic_post_comments_path(@topic, @post)
      end
