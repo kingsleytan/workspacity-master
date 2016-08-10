@@ -13,7 +13,7 @@ before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
 
   def create
     @topic = Topic.find_by(id: params[:topic_id])
-    @post = Post.new(post_params.merge(topic_id: params[:topic_id]))
+    @post = current_user.posts.build(post_params.merge(topic_id: params[:topic_id]))
 
     if @post.save
       flash[:success] = "You've created a new post."
@@ -34,7 +34,7 @@ before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
 
     @post = Post.find_by(id: params[:id])
     @topic = @post.topic
-
+    authorize @post
     if @post.update(post_params)
       redirect_to topic_posts_path(@topic)
     else
