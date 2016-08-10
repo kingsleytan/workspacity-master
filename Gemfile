@@ -10,6 +10,8 @@ gem 'mini_magick'
 
 gem 'carrierwave'
 
+gem 'fog-aws'
+
 gem 'font-awesome-rails'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
@@ -38,7 +40,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootstrap-sass'
 group :production do
-gem 'rails_12factor'
+  gem 'rails_12factor'
 end
 
 
