@@ -11,14 +11,15 @@ before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
     @post = Post.find_by(id: params[:post_id])
     @topic = @post.topic
     @comment = Comment.new
+    authorize @comment
   end
 
   def create
 
     @post = Post.find_by(id: params[:post_id])
     @topic = @post.topic
-    @comment = Comment.new(comment_params.merge(post_id: params[:post_id]))
-
+    @comment = current_user.comments.build(comment_params.merge(post_id: params[:post_id]))
+authorize @comment
     if @comment.save
       flash[:success] = "You've created a new comment."
       redirect_to topic_post_comments_path(@topic,@post)
@@ -41,7 +42,7 @@ before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
     @post = Post.find_by(id: params[:post_id])
     @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
-
+authorize @comment
     if @comment.update(comment_params)
       redirect_to topic_post_comments_path(@topic,@post)
     else
