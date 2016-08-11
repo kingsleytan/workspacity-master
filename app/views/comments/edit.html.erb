@@ -5,7 +5,7 @@
   </div>
 
   <div class="form-edit">
-    <%= form_for(@comment, url: topic_post_comment_path(@topic, @post, @comment), html: { id: "comment-update-form" }) do |f| %>
+    <%= form_for(@comment, url: topic_post_comment_path(@topic, @post, @comment), remote: true, html: { id: "comment-update-form" }) do |f| %>
     <h1 class="text-center">
       Update Your Comment Here
     </h1>

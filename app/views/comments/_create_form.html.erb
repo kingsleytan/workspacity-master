@@ -1,0 +1,27 @@
+<div class="new">
+
+  <div class="partial-comment">
+    <h1 style="color: black">Create Comment</h1>
+  </div>
+
+  <div class="form-group">
+    <h4 class="text-center"> Comment Image </h4>
+    <div id="preview-image">
+      <% if comment.image? %>
+      <%= image_tag comment.image, class: "img-settings img-responsive center-block" %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <%= form_for(comment, url: topic_post_comments_path(post.topic, post), method: :post, authenticity_token: true, remote: true, html: { id: "comment-create-form", multipart: true }) do |f| %>
+    <h4> <%= f.label :text_field, "Description" %> </h4>
+    <%= f.text_field :body, id: "comment_body_field", class: 'form-control' %>
+  </div>
+
+  <div class="font-feature-new text-center">
+    <%= link_to "Back to all topics", topics_path, class: "btn btn-success btn-lg"%>
+    <%= f.submit "Create Comment", class: "btn btn-success btn-lg" %>
+  </div>
+ <% end %>
+</div>

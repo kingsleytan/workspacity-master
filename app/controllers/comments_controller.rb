@@ -1,31 +1,26 @@
 class CommentsController < ApplicationController
-before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
+  respond_to :js
+
+  before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
+
   def index
     @post = Post.includes(:comments).find_by(id: params[:post_id])
     @topic = @post.topic
     @comments = @post.comments.order("created_at DESC")
-  end
-
-  def new
-
-    @post = Post.find_by(id: params[:post_id])
-    @topic = @post.topic
     @comment = Comment.new
-    authorize @comment
   end
 
   def create
-
     @post = Post.find_by(id: params[:post_id])
     @topic = @post.topic
     @comment = current_user.comments.build(comment_params.merge(post_id: params[:post_id]))
-authorize @comment
+    @new_comment = Comment.new
+    authorize @comment
+
     if @comment.save
-      flash[:success] = "You've created a new comment."
-      redirect_to topic_post_comments_path(@topic,@post)
+      flash.now[:success] = "Comment created"
     else
-      flash[:danger] = @comment.errors.full_messages
-      render :new
+      flash.now[:danger] = @comment.errors.full_messages
     end
   end
 
@@ -42,10 +37,12 @@ authorize @comment
     @post = Post.find_by(id: params[:post_id])
     @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
-authorize @comment
+    authorize @comment
     if @comment.update(comment_params)
+      flash.now[:success] = "You've updated your comment."
       redirect_to topic_post_comments_path(@topic,@post)
     else
+      flash.now[:danger] = @comment.errors.full_messages
       redirect_to edit_topic_post_comment_path(@topic, @post, @comment)
     end
   end
@@ -55,10 +52,11 @@ authorize @comment
     @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
     authorize @comment
-     if @comment.destroy
-       redirect_to topic_post_comments_path(@topic, @post)
-     end
-   end
+    if @comment.destroy
+      flash.now[:success] = "You've deleted your comment."
+      redirect_to topic_post_comments_path(@topic, @post)
+    end
+  end
 
 
   private

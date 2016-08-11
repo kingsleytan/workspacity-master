@@ -6,32 +6,22 @@
   <div style="margin: 30px" class="form-group text-center">
     <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
     <%= link_to "Back to all posts", topic_posts_path, class: "btn btn-info btn-lg"%>
-    <%= link_to "Add new comment", new_topic_post_comment_path, class: "btn btn-success btn-lg" %>
     <%= link_to "Delete Post", topic_post_path(@topic,@post), method: :delete, class: "btn btn-danger btn-lg", data: { confirm: "Delete?"} %>
   </div>
 
-  <div class="comment-array text-center">
-    <% @comments.each do |comment| %>
-    <div class="form-group">
-       <h4 class="text-center"> Comment Image </h4>
-       <div id="preview-image">
-         <% if comment.image? %>
-           <%= image_tag comment.image, class: "img-settings img-responsive center-block" %>
-         <% end %>
-       </div>
-     </div>
-    <div class="comment-item">
-      <h5 class="font-feature-2"><%= comment.body %></h5>
-      <div style="margin: 5px" class="edit-comment">
 
-        <%= link_to edit_topic_post_comment_path(@topic, @post, comment) do%>
-        <%= fa_icon "edit 2x", class: "btn btn-success btn-lg" %>
-        <% end %>
-        <%= link_to topic_post_comment_path(@topic,@post,comment), method: :delete do%>
-        <%= fa_icon "trash 2x", class: "btn btn-danger btn-lg" %>
-        <% end %>
-      </div>
+  <div style="margin: 5px" class="new-comment">
+    <% @comments.each do |comment| %>
+    <div id="comments-form-container">
+      <%= render partial: "comments", locals: { comment: comment, post: @post } %>
     </div>
-    <% end %>
+  <% end %>
+
+  <div style="margin: 5px" class="new-comment">
+    <div id="comments-form-container">
+      <%= render partial: "comments/create_form", locals: { comment: @comment, post: @post } %>
+    </div>
+
+
+    </div>
   </div>
-</div>

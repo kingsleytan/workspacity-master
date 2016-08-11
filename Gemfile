@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+gem 'remotipart', github: 'mshibuya/remotipart', ref: '88d9a7d' 
+
+gem 'responders'
+
 gem "pundit"
 
 group :development do
