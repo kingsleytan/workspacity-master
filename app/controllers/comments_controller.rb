@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   def index
     @post = Post.includes(:comments).find_by(id: params[:post_id])
     @topic = @post.topic
-    @comments = @post.comments.order("created_at DESC")
+    @comments = @post.comments
     @comment = Comment.new
   end
 
@@ -40,10 +40,8 @@ class CommentsController < ApplicationController
     authorize @comment
     if @comment.update(comment_params)
       flash.now[:success] = "You've updated your comment."
-      redirect_to topic_post_comments_path(@topic,@post)
     else
       flash.now[:danger] = @comment.errors.full_messages
-      redirect_to edit_topic_post_comment_path(@topic, @post, @comment)
     end
   end
 
@@ -51,10 +49,9 @@ class CommentsController < ApplicationController
     @post = Post.find_by(id: params[:post_id])
     @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
-    authorize @comment
+
     if @comment.destroy
-      flash.now[:success] = "You've deleted your comment."
-      redirect_to topic_post_comments_path(@topic, @post)
+      flash.now[:danger] = "You've deleted your comment."
     end
   end
 

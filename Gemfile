@@ -1,6 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'remotipart', github: 'mshibuya/remotipart', ref: '88d9a7d' 
+gem 'kaminari'
+
+gem 'remotipart', github: 'sr3d/remotipart'
 
 gem 'responders'
 

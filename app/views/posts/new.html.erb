@@ -1,13 +1,27 @@
 <div class="new">
   <div id="preview-image">
 
-    </div>
-    <div class="image-uploader">
-  <div class="background-new">
-    <h1 style="color: black">Create Post</h1>
   </div>
+  <div class="image-uploader">
+    <div class="background-new">
+      <h1 style="color: black">Create Post</h1>
+    </div>
 
-  <%= form_for(@post, url: topic_posts_path(@topic, @post), html: { id: "post-create-form" }) do |f| %>
+    <%= form_for(@post, url: topic_posts_path(@topic, @post), html: { id: "post-create-form" }) do |f| %>
+
+    <div class="form-group">
+      <h4 class="text-center"> Post Image </h4>
+      <div id="preview-image">
+        <% if @post.image? %>
+        <%= image_tag @post.image, class: "img-settings img-responsive center-block" %>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <%= f.file_field :image, id: "post_image_field", class: 'form-control image-uploader' %>
+    </div>
+
     <div class="form-group">
       <h4> <%= f.label :title_field, "Title" %> </h4>
       <%= f.text_field :title, required: true, id: "post_title_field", class: 'form-control' %>
@@ -22,7 +36,7 @@
       <%= link_to "Back to all posts", topic_posts_path, class: "btn btn-info btn-lg"%>
       <%= f.submit "Create Post", class: "btn btn-success btn-lg" %>
     </div>
-  <% end %>
-</div>
+    <% end %>
+  </div>
 
 </div>

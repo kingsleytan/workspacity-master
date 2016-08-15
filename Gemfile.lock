@@ -1,7 +1,6 @@
 GIT
-  remote: git://github.com/mshibuya/remotipart.git
-  revision: 88d9a7d55bde66acb6cf3a3c6036a5a1fc991d5e
-  ref: 88d9a7d
+  remote: git://github.com/sr3d/remotipart.git
+  revision: 572f45d234a8d1ce4158609fe18bd54086fc5735
   specs:
     remotipart (1.2.1)
 
@@ -106,6 +105,9 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.0.2)
+    kaminari (0.17.0)
+      actionpack (>= 3.0.0)
+      activesupport (>= 3.0.0)
     launchy (2.4.3)
       addressable (~> 2.3)
     letter_opener (1.4.1)
@@ -227,6 +229,7 @@ DEPENDENCIES
   font-awesome-rails
   jbuilder (~> 2.5)
   jquery-rails
+  kaminari
   letter_opener
   listen (~> 3.0.5)
   mini_magick

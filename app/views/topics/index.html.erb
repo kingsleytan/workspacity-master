@@ -18,10 +18,18 @@
         <%= link_to "Edit: #{topic.title}", edit_topic_path(topic), class: "btn btn-primary" %>
       </div>
     </div>
-
-
     <% end %>
+
   </div>
 
+  <div class="paginate-footer text-center">
+    <%= paginate @topics, :window => 1 %>
+  </div>
+
+    <!-- //remote: true = dont refresh, and make this an AJAX call -->
+
+  <div class="paginate-footer text-center">
+    <%= page_entries_info @topics %>
+  </div>
 
 </div>

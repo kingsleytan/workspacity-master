@@ -10,18 +10,14 @@
   </div>
 
 
-  <div style="margin: 5px" class="new-comment">
+  <div style="margin: 5px" class="all-comments" id="comments">
     <% @comments.each do |comment| %>
-    <div id="comments-form-container">
-      <%= render partial: "comments", locals: { comment: comment, post: @post } %>
-    </div>
-  <% end %>
-
-  <div style="margin: 5px" class="new-comment">
-    <div id="comments-form-container">
-      <%= render partial: "comments/create_form", locals: { comment: @comment, post: @post } %>
-    </div>
-
-
-    </div>
+        <%= render partial: "comment", locals: { comment: comment, post: @post, topic: @topic } %>
+    <% end %>
   </div>
+
+  <div style="margin: 5px" class="new-comment" id="comments-form-container">
+      <%= render partial: "create_form", locals: { comment: @comment, post: @post } %>
+  </div>
+
+</div>
