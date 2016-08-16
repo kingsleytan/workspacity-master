@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'redis'
+
 gem 'kaminari'
 
 gem 'remotipart', github: 'sr3d/remotipart'

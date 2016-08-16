@@ -1,5 +1,5 @@
 $('#flash-messages-container').html("<%=j render partial: 'partials/flash_messages' %>")
 
 <% if @comment.persisted? %>
-  $('#comment-update').replaceWith("<%=j render partial: 'comment', locals: { comment: @comment, post: @comment.post, topic: @topic } %>")
+  $('#comment-update').replaceWith("<%=j render partial: 'comment', locals: { comment: @comment, post: @comment.post, topic: @topic, extra_class: '' } %>")
   <% end %>

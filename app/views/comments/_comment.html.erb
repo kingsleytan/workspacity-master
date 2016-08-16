@@ -1,27 +1,31 @@
-<div class="comment-array text-center" data-id="<%= comment.id %>">
+<div class="comment <%=extra_class%>" data-id="<%= comment.id %>">
   <div class="form-group" id="preview-image">
     <% if comment.image? %>
     <%= image_tag comment.image, class: "img-settings img-responsive center-block" %>
     <% end %>
   </div>
-</div>
 
-
-  <div class="edit-comment-button" id="comment-edit-form">
-    <div class="delete-comment-button" id="delete-comment">
+<div class="edit-comment-button" id="comment-edit-form">
+  <div class="delete-comment-button" id="delete-comment">
     <h5 class="font-feature-2"><%= comment.body %>
     </h5>
-    <%= link_to edit_topic_post_comment_path(topic, post, comment), remote: true do%>
+    <% if comment.user == current_user %>
+    <%= link_to edit_topic_post_comment_path(post.topic, post, comment), remote: true do%>
     <%= fa_icon "edit", class: "btn btn-success btn-lg" %>
     <% end %>
+    <% end %>
 
+    <% if comment.user == current_user || current_user&.admin? || current_user&.moderator? %>
 
-
-    <%= link_to topic_post_comment_path(topic,post,comment), method: :delete, remote: true do%>
+    <%= link_to topic_post_comment_path(post.topic,post,comment), method: :delete, remote: true do%>
     <%= fa_icon "trash", class: "btn btn-danger btn-lg" %>
     <% end %>
+    <% end %>
   </div>
-  </div>
+
+  <p class="date"> Posted: <%= comment.created_at %> </p>
+
+</div>
 
 
 </div>

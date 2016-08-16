@@ -1,4 +1,4 @@
-<div class="comments">
+<div class="comments-index" data-id="<%= @post.id %>">
   <div class="background">
     <h1 style="color: white; font-size: 50px">Comments</h1>
   </div>
@@ -12,12 +12,14 @@
 
   <div style="margin: 5px" class="all-comments" id="comments">
     <% @comments.each do |comment| %>
-        <%= render partial: "comment", locals: { comment: comment, post: @post, topic: @topic } %>
+    <%= render partial: "comment", locals: { comment: comment, post: @post, topic: @topic, extra_class: '' } %>
     <% end %>
   </div>
 
+  <% if current_user %>
   <div style="margin: 5px" class="new-comment" id="comments-form-container">
-      <%= render partial: "create_form", locals: { comment: @comment, post: @post } %>
+    <%= render partial: "create_form", locals: { comment: @comment, post: @post } %>
   </div>
+  <% end %>
 
 </div>
