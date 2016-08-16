@@ -9,6 +9,7 @@ postsChannelFunctions = () ->
     if $('.comments-index').data().id == data.post.id && $(".comment[data-id=#{data.comment.id}]").length < 1
       $('#comments').append(data.partial)
       checkMe(data.comment.id)
+
       if document.hidden
         notification = new Notification data.post.title, body: data.comment.body, icon: data.post.image.thumb.url
 
