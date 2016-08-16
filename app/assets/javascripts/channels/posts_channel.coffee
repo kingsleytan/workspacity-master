@@ -17,15 +17,14 @@ postsChannelFunctions = () ->
           this.close()
 
   updateComment = (data) ->
-    if $('.comments-index').data().id == data.post.id && $(".comment[data-id=#{data.comment.id}]").length < 1
-      $(".comment[data-id=#{data.comment.id}]").replaceWith(data.partial)
+    if $('.comments-index').data().id == data.post.id
+      $(".comment[data-id=#{data.comment.id}]").after(data.partial).remove();
       checkMe(data.comment.id)
 
 
   destroyComment = (data) ->
-    if $('.comments-index').data().id == data.post.id && $(".comment[data-id=#{data.comment.id}]").length < 1
-      $(".comment[data-id=#{data.comment.id}]").remove(data.partial)
-      checkMe(data.comment.id)
+    if $('.comments-index').data().id == data.post.id
+      $(".comment[data-id=#{data.comment.id}]").remove()
 
   if $('.comments-index').length > 0
     App.posts_channel = App.cable.subscriptions.create {
