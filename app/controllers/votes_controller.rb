@@ -5,15 +5,16 @@ class VotesController < ApplicationController
   def upvote
     @vote = current_user.votes.find_or_create_by(comment_id: params[:comment_id])
     if @vote.update(value: +1)
+      flash.now[:success] = "You've upvoted."
       VoteBroadcastJob.perform_later(@vote.comment)
     end
-
   end
 
   def downvote
     @vote = current_user.votes.find_or_create_by(comment_id: params[:comment_id])
     if @vote.update(value: -1)
       VoteBroadcastJob.perform_later(@vote.comment)
+      flash[:danger] = "You've downvoted."
     end
   end
 

@@ -4,16 +4,16 @@ class CommentsController < ApplicationController
   before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
 
   def index
-    @post = Post.includes(:comments).find_by(id: params[:post_id])
+    @post = Post.includes(:comments).find_by(slug: params[:post_id])
     @topic = @post.topic
     @comments = @post.comments
     @comment = Comment.new
   end
 
   def create
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(slug: params[:post_id])
     @topic = @post.topic
-    @comment = current_user.comments.build(comment_params.merge(post_id: params[:post_id]))
+    @comment = current_user.comments.build(comment_params.merge(post_id: @post.id))
     @new_comment = Comment.new
     authorize @comment
 
@@ -27,7 +27,7 @@ class CommentsController < ApplicationController
 
   def edit
 
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(slug: params[:post_id])
     @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
     authorize @comment
@@ -35,7 +35,7 @@ class CommentsController < ApplicationController
 
   def update
 
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(slug: params[:post_id])
     @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
     authorize @comment
@@ -48,7 +48,7 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find_by(id: params[:post_id])
+    @post = Post.find_by(slug: params[:post_id])
     @topic = @post.topic
     @comment = Comment.find_by(id: params[:id])
     authorize @comment
