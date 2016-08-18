@@ -2,17 +2,17 @@ class PostsController < ApplicationController
 before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
 
   def index
-    @topic = Topic.includes(:posts).find_by(id: params[:topic_id])
+    @topic = Topic.includes(:posts).friendly.find(params[:topic_id])
     @posts = @topic.posts.order("created_at DESC")
   end
 
   def new
-    @topic = Topic.find_by(id: params[:topic_id])
+    @topic = Topic.friendly.find(params[:topic_id])
     @post = Post.new
   end
 
   def create
-    @topic = Topic.find_by(id: params[:topic_id])
+    @topic = Topic.friendly.find(params[:topic_id])
     @post = current_user.posts.build(post_params.merge(topic_id: params[:topic_id]))
 
     if @post.save
@@ -25,14 +25,14 @@ before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
   end
 
   def edit
-    @post = Post.find_by(id: params[:id])
+    @post = Post.friendly.find(params[:id])
     @topic = @post.topic
     authorize @post
   end
 
   def update
 
-    @post = Post.find_by(id: params[:id])
+    @post = Post.friendly.find(params[:id])
     @topic = @post.topic
     authorize @post
     if @post.update(post_params)
