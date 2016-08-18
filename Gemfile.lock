@@ -1,4 +1,11 @@
 GIT
+  remote: git://github.com/norman/friendly_id.git
+  revision: aff0564584e84ffa505e6e278b65ca3c4ee5d698
+  specs:
+    friendly_id (5.2.0.beta.1)
+      activerecord (>= 4.0.0)
+
+GIT
   remote: git://github.com/sr3d/remotipart.git
   revision: 572f45d234a8d1ce4158609fe18bd54086fc5735
   specs:
@@ -228,6 +235,7 @@ DEPENDENCIES
   figaro
   fog-aws
   font-awesome-rails
+  friendly_id!
   jbuilder (~> 2.5)
   jquery-rails
   kaminari

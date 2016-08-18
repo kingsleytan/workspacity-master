@@ -1,0 +1,3 @@
+$('#flash-messages-container').html("<%=j render partial: 'partials/flash_messages' %>")
+
+$('#vote-panel').html("<%=j render partial: 'comments/vote', locals: { comment: @comment, extra_class: '' } %>")

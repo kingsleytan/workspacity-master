@@ -4,4 +4,5 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   enum role: [:user, :moderator, :admin]
+  has_many :votes
 end

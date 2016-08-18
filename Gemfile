@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+gem 'friendly_id', github: 'norman/friendly_id'
+
 gem 'redis'
 
 gem 'kaminari'
