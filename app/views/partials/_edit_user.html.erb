@@ -1,0 +1,32 @@
+<div class="modal fade" id="user-edit-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="new">
+          <div class="background-new">
+            <h1 style="color: black">Change password</h1>
+          </div>
+
+          <%= form_for(current_user, url: user_path(current_user), html: { id: "user-edit-form" }) do |f| %>
+
+          <div class="form-group">
+            <h4> <%= f.label :password %> </h4>
+            <%= f.password_field :password, id: "password_field", class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <h4> <%= f.label :password_confirmation %> </h4>
+            <%= f.password_field :password_confirmation, id: "password_field", class: 'form-control' %>
+          </div>
+
+          <div class="font-feature-new text-center">
+            <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
+            <%= f.submit "Change password", class: "btn btn-success btn-lg" %>
+          </div>
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
