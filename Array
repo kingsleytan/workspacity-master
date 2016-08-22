@@ -1,0 +1,2 @@
+      invoke  active_record
+      create    db/migrate/20160819144624_add_coordinates_fields_to_users.rb

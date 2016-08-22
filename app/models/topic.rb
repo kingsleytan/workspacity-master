@@ -7,4 +7,12 @@ class Topic < ApplicationRecord
   validates :title, length: { minimum: 5 }, presence: true
   validates :description, length: { minimum: 20 }, presence: true
   paginates_per 2
+
+#   def self.search(search)
+#   if search
+#     find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+#   else
+#     find(:all)
+#   end
+# end
 end

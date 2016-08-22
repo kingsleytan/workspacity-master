@@ -3,6 +3,16 @@
     <h1 style="color: white; font-size: 50px">Topics</h1>
   </div>
 
+<!-- <div class="topic-search-form">
+  <% form_tag topics_path, :method => 'get' do %>
+    <p>
+      <%= text_field_tag :search, params[:search] %>
+      <%= submit_tag "Search", :name => nil %>
+    </p>
+  <% end %>
+</div> -->
+
+
   <div style="margin: 30px" class="form-group text-center">
     <%= link_to "Add new topic", new_topic_path, class: "btn btn-success btn-lg" %>
   </div>

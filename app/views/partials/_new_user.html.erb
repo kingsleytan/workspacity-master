@@ -29,6 +29,19 @@
             <%= f.password_field :password_confirmation, id: "password_field", class: 'form-control' %>
           </div>
 
+          <div class="form-group">
+            <h4> <%= f.label :text_field, "Latitude" %> </h4>
+            <%= f.text_field :latitude, id: "latitude_field", class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <h4> <%= f.label :text_field, "Longtitude" %> </h4>
+            <%= f.text_field :longtitude, id: "longitude_field", class: 'form-control' %>
+          </div>
+          <div class="form-group">
+            <h4> <%= f.label :text_field, "Address" %> </h4>
+            <%= f.text_field :address, id: "address_field", class: 'form-control' %>
+          </div>
+
           <div class="font-feature-new text-center">
             <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
             <%= f.submit "Create Account", class: "btn btn-success btn-lg" %>

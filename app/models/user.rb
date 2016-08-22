@@ -9,4 +9,6 @@ class User < ApplicationRecord
   has_many :comments
   enum role: [:user, :moderator, :admin]
   has_many :votes
+  geocoded_by :address, :lookup => :google
+  after_validation :geocode          # auto-fetch coordinates
 end

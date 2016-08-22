@@ -3,6 +3,17 @@
     <h1 style="color: white; font-size: 50px"> Posts of <%=@topic.title%></h1>
   </div>
 
+  <%= form_tag(topic_posts_path, :method => "get", id: "search-form") do %>
+<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+<%= submit_tag "Search" %>
+<% end %>
+
+<% if @posts.present? %>
+  <%= render @posts %>
+<% else %>
+  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
+<% end %>
+
   <div style="margin: 30px" class="form-group text-center">
     <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
     <%= link_to "Add new post", new_topic_post_path, class: "btn btn-success btn-lg" %>
@@ -21,7 +32,7 @@
         <% end %>
       </div>
     </div>
-    
+
     <div class="post-item">
       <h3 class="font-feature-1"><%= post.title %></h3>
       <h5 class="font-feature-2"><%= post.body %></h5>

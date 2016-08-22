@@ -18,7 +18,9 @@
     <%= render partial:'partials/header' %>
     <%= render partial:'partials/new_user' %>
     <%= render partial:'partials/login' %>
+    <% if current_user%>
     <%= render partial:'partials/edit_user' %>
+    <% end %>
   </div>
   <div class = "flash_messages" id='flash-messages-container'>
     <%= render partial: "partials/flash_messages" %>
