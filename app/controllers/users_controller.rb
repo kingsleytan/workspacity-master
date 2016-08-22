@@ -7,8 +7,6 @@ class UsersController < ApplicationController
   def edit
     @user ||= User.friendly.find(params[:id])
     authorize @user
-    flash[:danger] = "You're not authorized"
-    redirect_to root_path
   end
 
   def create

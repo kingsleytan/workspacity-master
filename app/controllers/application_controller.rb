@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
     flash[:danger] = "You're not authorized"
     redirect_to request.referrer || root_path
   end
-  
+
   private
 
   def authenticate!
@@ -19,8 +19,9 @@ class ApplicationController < ActionController::Base
 
   def current_user
     return unless session[:id]
-    @user ||= User.find_by(id: session[:id])
+    @current_user ||= User.find_by(id: session[:id])
   end
+  helper_method :current_user
 
 
 end

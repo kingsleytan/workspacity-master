@@ -49,16 +49,15 @@ RSpec.describe UsersController, type: :controller do
       expect(flash[:danger]).to eql("You're not authorized")
     end
 
-    # it "should render edit" do
-    #
-    #   params = { id: @admin_user.id }
-    #   get :edit, params: params, session: { id: @admin_user.id }
-    #
-    #   current_user = subject.send(:current_user)
-    #   binding.pry
-    #   expect(subject).to render_template(:edit)
-    #   expect(current_user).to be_present
-    # end
+    it "should render edit" do
+
+      params = { id: @admin_user.id }
+      get :edit, params: params, session: { id: @admin_user.id }
+
+      current_user = subject.send(:current_user)
+      expect(subject).to render_template(:edit)
+      expect(current_user).to be_present
+    end
 
     it "should update user" do
 
