@@ -1,15 +1,15 @@
 class PostsController < ApplicationController
-before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
+  before_action :authenticate!, only: [:create, :edit, :update, :new, :destroy]
 
   def index
     @topic = Topic.includes(:posts).friendly.find(params[:topic_id])
     # @posts = @topic.posts.order("created_at DESC")
     @posts = Post.all
-  if params[:search]
-    @posts = Post.search(params[:search]).order("created_at DESC")
-  else
-    @posts = Post.all.order('created_at DESC')
-  end
+    if params[:search]
+      @posts = Post.search(params[:search]).order("created_at DESC")
+    else
+      @posts = Post.all.order('created_at DESC')
+    end
   end
 
   def new

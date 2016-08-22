@@ -3,44 +3,39 @@
     <h1 style="color: white; font-size: 50px"> Posts of <%=@topic.title%></h1>
   </div>
 
-  <%= form_tag(topic_posts_path, :method => "get", id: "search-form") do %>
-<%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
-<%= submit_tag "Search" %>
-<% end %>
+  <div class="search-form">
+    <%= form_tag(topic_posts_path, :method => "get", id: "search-form") do %>
+      <%= text_field_tag :search, params[:search], placeholder: "Search Posts" %>
+      <%= submit_tag "Search" %>
+      <% end %>
+    </div>
 
-<% if @posts.present? %>
-  <%= render @posts %>
-<% else %>
-  <p>There are no posts containing the term(s) <%= params[:search] %>.</p>
-<% end %>
+    
+    <div style="margin: 30px" class="form-group text-center">
+      <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
+      <%= link_to "Add new post", new_topic_post_path, class: "btn btn-success btn-lg" %>
+      <%= link_to "Delete Topic", topic_path(@topic), method: :delete, class: "btn btn-danger btn-lg", data: { confirm: "Delete?"} %>
+    </div>
 
-  <div style="margin: 30px" class="form-group text-center">
-    <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
-    <%= link_to "Add new post", new_topic_post_path, class: "btn btn-success btn-lg" %>
-    <%= link_to "Delete Topic", topic_path(@topic), method: :delete, class: "btn btn-danger btn-lg", data: { confirm: "Delete?"} %>
-  </div>
-
-
-
-  <div class="post-array text-center">
-    <% @posts.each do |post| %>
-    <div class="form-group">
-      <h4 class="text-center"> Post Image </h4>
-      <div id="a">
-        <% if post.image? %>
+    <div class="post-array text-center">
+      <% @posts.each do |post| %>
+      <div class="form-group">
+        <h4 class="text-center"> Post Image </h4>
+        <div id="a">
+          <% if post.image? %>
           <%= image_tag post.image, class: "img-settings img-responsive center-block" %>
-        <% end %>
+          <% end %>
+        </div>
       </div>
-    </div>
 
-    <div class="post-item">
-      <h3 class="font-feature-1"><%= post.title %></h3>
-      <h5 class="font-feature-2"><%= post.body %></h5>
-      <%= link_to post.title, topic_post_comments_path(@topic,post), class: "btn btn-primary" %>
-      <div style="margin: 5px" class="edit-post">
-        <%= link_to "Edit #{post.title}", edit_topic_post_path(@topic, post), class: "btn btn-primary" %>
+      <div class="post-item">
+        <h3 class="font-feature-1"><%= post.title %></h3>
+        <h5 class="font-feature-2"><%= post.body %></h5>
+        <%= link_to post.title, topic_post_comments_path(@topic,post), class: "btn btn-primary" %>
+        <div style="margin: 5px" class="edit-post">
+          <%= link_to "Edit #{post.title}", edit_topic_post_path(@topic, post), class: "btn btn-primary" %>
+        </div>
       </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
-</div>

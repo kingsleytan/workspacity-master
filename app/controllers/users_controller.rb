@@ -23,20 +23,22 @@ class UsersController < ApplicationController
 
   def update
     @user = User.friendly.find(params[:id])
-
+    authorize @user
     if @user.update(user_params)
       redirect_to user_path(@user)
+      flash[:success] = "You've updated your details"
     else
       redirect_to edit_user_path(@user)
+      flash[:danger] = user.errors.full_messages
     end
   end
 
 
 
-private
+  private
 
-def user_params
-  params.require(:user).permit(:email, :password, :image, :username, :password_confirmation, :address)
-end
+  def user_params
+    params.require(:user).permit(:email, :password, :image, :username, :password_confirmation, :address)
+  end
 
 end

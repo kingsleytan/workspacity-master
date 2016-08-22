@@ -37,7 +37,7 @@ RSpec.describe UsersController, type: :controller do
       params = { id: @admin_user.id }
       get :edit, params: params
       expect(subject).to redirect_to(root_path)
-      expect(flash[:danger]).to eql("You're not authorized")
+      expect(flash[:danger]).to eql("You need to login first")
     end
 
     it "should redirect if user unauthorized" do
@@ -57,6 +57,25 @@ RSpec.describe UsersController, type: :controller do
       current_user = subject.send(:current_user)
       expect(subject).to render_template(:edit)
       expect(current_user).to be_present
+    end
+  end
+
+  describe "update user" do
+
+    it "should redirect if not logged in" do
+      params = { id: @admin_user.id, user: { email: "new@email.com", username: "newusername" } }
+      patch :update, params: params
+
+      expect(subject).to redirect_to(root_path)
+      expect(flash[:danger]).to eql("You need to login first")
+    end
+
+    it "should redirect if user unauthorized" do
+      params = { id: @admin_user.id, user: { email: "new@email.com", username: "newusername" } }
+      patch :update, params: params, session: { id: @unauthorized_user.id }
+
+      expect(subject).to redirect_to(root_path)
+      expect(flash[:danger]).to eql("You're not authorized")
     end
 
     it "should update user" do
