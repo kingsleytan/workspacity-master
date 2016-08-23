@@ -11,4 +11,14 @@ class User < ApplicationRecord
   has_many :votes
   geocoded_by :address, :lookup => :google
   after_validation :geocode          # auto-fetch coordinates
+
+  before_save :update_slug
+
+  private
+
+  def update_slug
+    if username
+      self.slug = username.gsub(" ", "-")
+    end
+  end
 end

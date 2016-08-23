@@ -8,11 +8,21 @@ class Topic < ApplicationRecord
   validates :description, length: { minimum: 20 }, presence: true
   paginates_per 2
 
-#   def self.search(search)
-#   if search
-#     find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
-#   else
-#     find(:all)
-#   end
-# end
+  #   def self.search(search)
+  #   if search
+  #     find(:all, :conditions => ['name LIKE ?', "%#{search}%"])
+  #   else
+  #     find(:all)
+  #   end
+  # end
+
+  before_save :update_slug
+
+  private
+
+  def update_slug
+    if title
+      self.slug = title.gsub(" ", "-")
+    end
+  end
 end
