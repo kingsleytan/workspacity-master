@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe SessionsController, type: :controller do
   before(:all) do
-    @admin_user = User.create(username: "testadmin", email: "testadmin@example.com", password: "password")
+    @admin_user = create(:user, :admin)
   end
 
   describe "render new login page" do
