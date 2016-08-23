@@ -3,14 +3,11 @@ require 'rails_helper'
 RSpec.describe CommentsController, type: :controller do
 
   before(:all) do
-    @admin_user = User.create(username: "testadmin", email: "testadmin@example.com", password: "password", role: "admin")
-    @unauthorized_user = User.create(username: "Dummy", email: "dummy@example.com", password: "password")
-    @dummy_topic = Topic.create(title: "dummy topic", description: "dummy dummy dummy dummy dummy",
-    user_id: @admin_user.id)
-    @dummy_post = Post.create(title: "dummy post", body: "dummy dummy dummy dummy dummy",
-    user_id: @admin_user.id, topic_id: @dummy_topic.id)
-    @dummy_comment = Comment.create(body: "dummy dummy dummy dummy dummy",
-    user_id: @admin_user.id, post_id: @dummy_post.id)
+    @admin_user = create(:user, :admin)
+    @unauthorized_user = create(:user, email: "dummy@example.com")
+    @dummy_topic = create(:topic)
+    @dummy_post = create(:post, user_id: @admin_user.id, topic_id: @dummy_topic.id)
+    @dummy_comment = create(:comment, user_id: @admin_user.id, post_id: @dummy_post.id)
   end
 
   describe "show all comments" do
