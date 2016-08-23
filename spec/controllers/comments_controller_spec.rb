@@ -7,7 +7,7 @@ RSpec.describe CommentsController, type: :controller do
     @unauthorized_user = create(:user, email: "dummy@example.com")
     @dummy_topic = create(:topic)
     @dummy_post = create(:post, user_id: @admin_user.id, topic_id: @dummy_topic.id)
-    @dummy_comment = gcreate(:comment, user_id: @admin_user.id, post_id: @dummy_post.id)
+    @dummy_comment = create(:comment, user_id: @admin_user.id, post_id: @dummy_post.id)
   end
 
   describe "show all comments" do

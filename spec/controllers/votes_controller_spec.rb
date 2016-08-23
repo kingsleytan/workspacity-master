@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe VotesController, type: :controller do
   before(:all) do
-    @user = User.create(username: "Dummy", email: "dummy@example.com", password: "password")
-    @dummy_comment = Comment.create(body: "dummy dummy dummy dummy dummy", user_id: @user.id)
+    @user = create(:user, :admin)
+    @dummy_comment = create(:comment, user_id: @user.id)
   end
 
   describe "comment upvote" do
