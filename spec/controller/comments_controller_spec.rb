@@ -1,95 +1,70 @@
 require 'rails_helper'
 
-RSpec.describe PostsController, type: :controller do
+RSpec.describe CommentsController, type: :controller do
 
   before(:all) do
     @admin_user = User.create(username: "testadmin", email: "testadmin@example.com", password: "password", role: "admin")
     @unauthorized_user = User.create(username: "Dummy", email: "dummy@example.com", password: "password")
-    @dummy_topic = Topic.create(title: "dummy topic", description: "dummy dummy dummy dummy dummy", user_id: @admin_user.id)
-    @dummy_post = Post.create(title: "dummy post", body: "dummy dummy dummy dummy dummy", user_id: @admin_user.id, topic_id: @dummy_topic.id)
+    @dummy_topic = Topic.create(title: "dummy topic", description: "dummy dummy dummy dummy dummy",
+    user_id: @admin_user.id)
+    @dummy_post = Post.create(title: "dummy post", body: "dummy dummy dummy dummy dummy",
+    user_id: @admin_user.id, topic_id: @dummy_topic.id)
+    @dummy_comment = Comment.create(body: "dummy dummy dummy dummy dummy",
+    user_id: @admin_user.id, post_id: @dummy_post.id)
   end
 
-  describe "show all posts" do
-    it "should show all posts" do
-      params = {topic_id: @dummy_topic.id}
+  describe "show all comments" do
+    it "should show all comments" do
+      params = {topic_id: @dummy_topic.slug, post_id: @dummy_post.slug}
       get :index, params: params
       expect(subject).to render_template(:index)
-      expect(Post.count).to eql(1)
+      expect(Comment.count).to eql(1)
+      expect(assigns[:comment]).to be_present
     end
   end
 
-  describe "add new post" do
-    it "login before add post" do
-      params = {topic_id: @dummy_topic.id}
-      get :new, params: params
-      expect(subject).to redirect_to(root_path)
-      expect(flash[:danger]).to eql("You need to login first")
-    end
-
-    it "should render new" do
-      params = {topic_id: @dummy_topic.id}
-      get :new, params: params, session: { id: @admin_user.id }
-      current_user = subject.send(:current_user)
-      expect(subject).to render_template(:new)
-      expect(current_user).to be_present
-    end
-  end
-
-  describe "create post" do
-    it "should create new post" do
-      params = { post: { title: "test new post", body: "should create new post"}, topic_id: @dummy_topic.id }
-      post :create, params: params, session: { id: @admin_user.id }
-      # post = assigns[:post]  #to call instance variable -> @post in postsController
-      posts = Post.all # because this is an array posts[0]
-      # post = post.find_by(title: "test new post")
-      expect(Post.count).to eql(2)
-      expect(posts[1].title).to eql("test new post")
-      expect(posts[1].body).to eql("should create new post")
-      expect(flash[:success]).to eql("You've created a new post.")
-    end
-
-    it "title should more than 5 characters" do
-      params = { post: { title: "a", body: "test create post title length"}, topic_id: @dummy_topic.id }
-      post :create, params: params,  session: { id: @admin_user.id }
-      expect(flash[:danger]).to be_present
+  describe "create comment" do
+    it "should create new comment" do
+      params = { comment: { body: "should create new comment"}, topic_id: @dummy_topic.id, post_id: @dummy_post.slug }
+      post :create,xhr: true, params: params, session: { id: @admin_user.id }
+      comments = Comment.all
+      expect(Comment.count).to eql(2)
+      expect(comments[1].body).to eql("should create new comment")
+      expect(flash[:success]).to eql("Comment created")
     end
 
     it "body should more than 20 characters" do
-      params = { post: { title: "test title body length", body: "a"}, topic_id: @dummy_topic.id }
-      post :create, params: params,  session: { id: @admin_user.id }
+      params = { comment: { body: "a"}, topic_id: @dummy_topic.id, post_id: @dummy_post.slug }
+      post :create,xhr: true, params: params,  session: { id: @admin_user.id }
       expect(flash[:danger]).to be_present
     end
 
     it "body cannot be blank" do
-      params = { post: { title: "test no body", body: ""}, topic_id: @dummy_topic.id }
-      post :create, params: params,  session: { id: @admin_user.id }
+      params = { comment: { body: ""}, topic_id: @dummy_topic.id, post_id: @dummy_post.slug }
+      post :create,xhr: true, params: params,  session: { id: @admin_user.id }
       expect(flash[:danger]).to be_present
     end
   end
 
-  describe "edit post" do
-    it "should render edit" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id }
-      get :edit, params: params, session: { id: @admin_user.id }
-      post = Post.find_by(title: "dummy post")
-
-      expect(subject).to render_template(:edit)
-      expect(post.title).to eql("dummy post")
-      expect(post.body).to eql("dummy dummy dummy dummy dummy")
+  describe "edit comment" do
+    it "should edit comment" do
+      params = { topic_id: @dummy_topic.id, post_id: @dummy_post.slug, id: @dummy_comment.id }
+      get :edit, xhr: true, params: params, session: { id: @admin_user.id }
+      expect(assigns[:comment].body).to eql(@dummy_comment.body)
     end
 
 
     it "should redirect if not logged in" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id }
-      get :edit, params: params
+      params = { topic_id: @dummy_topic.id, post_id: @dummy_post.slug, id: @dummy_comment.id}
+      get :edit, xhr: true, params: params
       expect(subject).to redirect_to(root_path)
       expect(flash[:danger]).to eql("You need to login first")
     end
 
     it "should redirect if user unauthorized" do
 
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id }
-      get :edit, params: params, session: { id: @unauthorized_user.id }
+      params = { topic_id: @dummy_topic.id, post_id: @dummy_post.slug, id: @dummy_comment.id }
+      get :edit, xhr: true, params: params, session: { id: @unauthorized_user.id }
 
       expect(subject).to redirect_to(root_path)
       expect(flash[:danger]).to eql("You're not authorized")
@@ -97,56 +72,54 @@ RSpec.describe PostsController, type: :controller do
 
   end
 
-  describe "update post" do
+  describe "update comment" do
 
     it "should redirect if not logged in" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id, post: { title: "new title test", body: "this is to test the update title function"} }
+      params = { topic_id: @dummy_topic.id, post_id: @dummy_post.slug, id: @dummy_comment.id, comment: {body: "this is to test the update title function"} }
       patch :update, params: params
       expect(subject).to redirect_to(root_path)
       expect(flash[:danger]).to eql("You need to login first")
     end
 
     it "should redirect if user unauthorized" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id, post: { title: "new title test", body: "this is to test the update title function"} }
+      params = { topic_id: @dummy_topic.id, post_id: @dummy_post.slug, id: @dummy_comment.id, comment: {body: "this is to test the update title function"} }
       patch :update, params: params, session: { id: @unauthorized_user.id }
       expect(subject).to redirect_to(root_path)
       expect(flash[:danger]).to eql("You're not authorized")
     end
 
-    it "should update post" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id, post: { title: "new title test", body: "this is to test the update title function"} }
-      patch :update, params: params, session: { id: @admin_user.id }
-
-      @dummy_post.reload
-
-      expect(@dummy_post.title).to eql("new title test")
-      expect(@dummy_post.body).to eql("this is to test the update title function")
+    it "should update comment" do
+      params = { topic_id: @dummy_topic.id, post_id: @dummy_post.slug, id: @dummy_comment.id, comment: {body: "this is to test the update title function"} }
+      patch :update, xhr: true, params: params, session: { id: @admin_user.id }
+      @dummy_comment.reload
+      expect(assigns[:comment].body).to eql(@dummy_comment.body)
+      expect(@dummy_comment.body).to eql("this is to test the update title function")
     end
 
   end
 
-  describe "delete post" do
+  describe "delete comment" do
     it "should redirect if not logged in" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id }
+      params = { topic_id: @dummy_topic.id, post_id: @dummy_post.slug, id: @dummy_comment.id}
       delete :destroy, params: params
       expect(subject).to redirect_to(root_path)
       expect(flash[:danger]).to eql("You need to login first")
     end
 
     it "should redirect if user unauthorized" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id }
+      params = { topic_id: @dummy_topic.id, post_id: @dummy_post.slug, id: @dummy_comment.id }
       delete :destroy, params: params, session: { id: @unauthorized_user.id }
       expect(subject).to redirect_to(root_path)
       expect(flash[:danger]).to eql("You're not authorized")
     end
 
-    it "should delete post" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id }
-      pre_delete_count = Post.count
-      delete :destroy, params: params, session: { id: @admin_user.id }
-      post = Post.find_by(id: @dummy_post.id)
-      expect(post).to be_nil
-      expect(Post.count).to eql(pre_delete_count - 1)
+    it "should delete comment" do
+      params = { topic_id: @dummy_topic.id, post_id: @dummy_post.slug, id: @dummy_comment.id}
+      pre_delete_count = Comment.count
+      delete :destroy, xhr: true, params: params, session: { id: @admin_user.id }
+      comment = Comment.find_by(id: @dummy_comment.id)
+      expect(comment).to be_nil
+      expect(Comment.count).to eql(pre_delete_count - 1)
     end
   end
 
