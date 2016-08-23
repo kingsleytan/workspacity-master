@@ -3,9 +3,9 @@ require 'rails_helper'
 RSpec.describe TopicsController, type: :controller do
 
   before(:all) do
-    @admin_user = User.create(username: "testadmin", email: "testadmin@example.com", password: "password", role: "admin")
-    @unauthorized_user = User.create(username: "Dummy", email: "dummy@example.com", password: "password")
-    @dummy_topic = Topic.create(title: "dummy topic", description: "dummy dummy dummy dummy dummy", user_id: @admin_user.id)
+    @admin_user = create(:user, :admin)
+    @unauthorized_user = create(:user, email: "dummy@example.com")
+    @dummy_topic = create(:topic)
   end
 
   describe "show all topics" do
@@ -38,8 +38,8 @@ RSpec.describe TopicsController, type: :controller do
       topics = Topic.all # because this is an array topics[0]
       # topic = Topic.find_by(title: "test new topic")
       expect(Topic.count).to eql(2)
-      expect(topics[0].title).to eql("test new topic")
-      expect(topics[0].description).to eql("should create new topic")
+      expect(topics[1].title).to eql("test new topic")
+      expect(topics[1].description).to eql("should create new topic")
       expect(flash[:success]).to eql("You've created a new topic.")
     end
 
