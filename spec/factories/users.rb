@@ -1,7 +1,7 @@
 FactoryGirl.define do
   factory :user do
     password "password"
-
+    address "KL, Malaysia"
     trait :with_image do
       image { fixture_file_upload("#{::Rails.root}/spec/fixtures/Camera.jpg") }
     end
@@ -11,7 +11,7 @@ FactoryGirl.define do
     end
 
     trait :sequenced_username do
-      sequence(:username) { |n| "username#{n}@email.com" }
+      sequence(:username) { |n| "username#{n}" }
     end
 
     trait :admin do
@@ -25,5 +25,6 @@ FactoryGirl.define do
       sequence(:email) { |n| "moderator#{n}@email.com" }
       sequence(:username) { |n| "moderator#{n}" }
     end
+
   end
 end
