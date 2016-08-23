@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
   before(:all) do
-    @admin_user = User.create(username: "testadmin", email: "testadmin@example.com", password: "password")
-    @unauthorized_user = User.create(username: "Dummy", email: "dummy@example.com", password: "password")
+    @admin_user = create(:user, :admin)
+    @unauthorized_user = create(:user, email: "dummy@example.com")
   end
 
   describe "render new" do
@@ -37,7 +37,7 @@ RSpec.describe UsersController, type: :controller do
       params = { id: @admin_user.id }
       get :edit, params: params
       expect(subject).to redirect_to(root_path)
-      expect(flash[:danger]).to eql("You need to login first")
+      expect(flash[:danger]).to_not be_nil
     end
 
     it "should redirect if user unauthorized" do
@@ -67,7 +67,7 @@ RSpec.describe UsersController, type: :controller do
       patch :update, params: params
 
       expect(subject).to redirect_to(root_path)
-      expect(flash[:danger]).to eql("You need to login first")
+      expect(flash[:danger]).to_not be_nil
     end
 
     it "should redirect if user unauthorized" do
