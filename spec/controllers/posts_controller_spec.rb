@@ -69,7 +69,7 @@ RSpec.describe PostsController, type: :controller do
 
   describe "edit post" do
     it "should render edit" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id }
+      params = { topic_id: @dummy_topic.id, id: @dummy_post.id }
       get :edit, params: params, session: { id: @admin_user.id }
       post = Post.find_by(title: "dummy post")
 
@@ -80,7 +80,7 @@ RSpec.describe PostsController, type: :controller do
 
 
     it "should redirect if not logged in" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id }
+      params = { topic_id: @dummy_topic.id, id: @dummy_post.id }
       get :edit, params: params
       expect(subject).to redirect_to(root_path)
       expect(flash[:danger]).to eql("You need to login first")
@@ -88,7 +88,7 @@ RSpec.describe PostsController, type: :controller do
 
     it "should redirect if user unauthorized" do
 
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id }
+      params = { topic_id: @dummy_topic.id, id: @dummy_post.id }
       get :edit, params: params, session: { id: @unauthorized_user.id }
 
       expect(subject).to redirect_to(root_path)
@@ -100,21 +100,21 @@ RSpec.describe PostsController, type: :controller do
   describe "update post" do
 
     it "should redirect if not logged in" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id, post: { title: "new title test", body: "this is to test the update title function"} }
+      params = { topic_id: @dummy_topic.id, id: @dummy_post.id, post: { title: "new title test", body: "this is to test the update title function"} }
       patch :update, params: params
       expect(subject).to redirect_to(root_path)
       expect(flash[:danger]).to eql("You need to login first")
     end
 
     it "should redirect if user unauthorized" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id, post: { title: "new title test", body: "this is to test the update title function"} }
+      params = { topic_id: @dummy_topic.id, id: @dummy_post.id, post: { title: "new title test", body: "this is to test the update title function"} }
       patch :update, params: params, session: { id: @unauthorized_user.id }
       expect(subject).to redirect_to(root_path)
       expect(flash[:danger]).to eql("You're not authorized")
     end
 
     it "should update post" do
-      params = { topic_id: @dummy_post.id, id: @dummy_post.id, post: { title: "new title test", body: "this is to test the update title function"} }
+      params = { topic_id: @dummy_topic.id, id: @dummy_post.id, post: { title: "new title test", body: "this is to test the update title function"} }
       patch :update, params: params, session: { id: @admin_user.id }
 
       @dummy_post.reload
