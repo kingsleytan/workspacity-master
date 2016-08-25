@@ -25,6 +25,10 @@ ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
 
+  Capybara.register_driver :selenium do |app|
+    Capybara::Selenium::Driver.new(app, browser: :chrome)
+  end
+
   config.include FactoryGirl::Syntax::Methods
 
   config.before(:suite) do
