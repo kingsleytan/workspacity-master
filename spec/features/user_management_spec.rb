@@ -1,21 +1,19 @@
 require "rails_helper"
 
+#install chrome driver
+#brew install chromedriver
+#brew start chromedriver
+
 RSpec.feature "User Management", type: :feature, js: true do
   before(:all) do
-    @user = create(:user)
+    @user = create(:user, :sequenced_email, :sequenced_username)
   end
 
-  scenario "User registers" do
+  scenario "Register New User" do
 
     visit root_path
-    # click_button('My Account')
-# login_window = window_opened_by do
-#   click_button 'My Account'
-# end
-# find_button('My Account').click
     find("#Account").click
-find("#Register").click
-
+    find("#Register").click
     fill_in 'user_field', with: 'ironman'
     fill_in 'email_field', with: 'ironman@email.com'
     fill_in 'password_field', with: 'password'
@@ -34,5 +32,23 @@ find("#Register").click
     expect(user.username).to eql("ironman")
     expect(find('.flash-messages .message').text).to eql("You've created a new user.")
     expect(page).to have_current_path(root_path)
+  end
+
+  scenario "Login New User" do
+    visit root_path
+    find("#Account").click
+    find("#Login").click
+    fill_in 'email_field', with: @user.email
+    fill_in 'password_field', with: @user.password
+    click_button('Login')
+
+    user = User.find_by(email: @user.email)
+
+    expect(find('.flash-messages .message').text).to eql("Welcome back #{user.username}")
+    expect(user).to be_present
+    expect(user.email).to eql('user1@email.com')
+    expect(user.username).to eql("username1")
+    expect(page).to have_current_path(root_path)
+
   end
 end
