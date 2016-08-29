@@ -25,7 +25,7 @@ class UsersController < ApplicationController
     @user = User.friendly.find(params[:id])
     authorize @user
     if @user.update(user_params)
-      redirect_to user_path(@user)
+      redirect_to root_path
       flash[:success] = "You've updated your details"
     else
       redirect_to edit_user_path(@user)

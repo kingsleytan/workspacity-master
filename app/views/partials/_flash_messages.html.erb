@@ -1,9 +1,9 @@
 <div id="flash-messages-container">
 <div class="flash-messages">
 <% flash.each do |k,v| %>
-  <section class="flash-messages">
+  <section class="message-container">
     <div class="alert alert-<%=k%>">
-      <button type="button" class="close" data-dismiss="alert">
+      <button type="button" id="close" class="close" data-dismiss="alert">
         &times;
       </button>
       <div class="message">

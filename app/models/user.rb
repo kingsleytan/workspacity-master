@@ -14,6 +14,11 @@ class User < ApplicationRecord
 
   before_save :update_slug
 
+  validates :email, presence: true,
+                    uniqueness: true
+  validates :username, presence: true,
+                      uniqueness: true
+
   private
 
   def update_slug

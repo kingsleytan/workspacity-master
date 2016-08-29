@@ -4,10 +4,20 @@
       <div class="modal-body">
         <div class="new">
           <div class="background-new">
-            <h1 style="color: black">Change password</h1>
+            <h1 style="color: black">Edit Prodile</h1>
           </div>
 
           <%= form_for(current_user, url: user_path(current_user), html: { id: "user-edit-form" }) do |f| %>
+
+          <div class="form-group">
+            <h4> <%= f.label :username_field, "Username" %> </h4>
+            <%= f.text_field :username, required: true, id: "user_field", class: 'form-control' %>
+          </div>
+
+          <div class="form-group">
+            <h4> <%= f.label :email %> </h4>
+            <%= f.text_field :email, required: true, id: "email_field", class: 'form-control' %>
+          </div>
 
           <div class="form-group">
             <h4> <%= f.label :password %> </h4>
@@ -21,7 +31,7 @@
 
           <div class="font-feature-new text-center">
             <%= link_to "Back to all topics", topics_path, class: "btn btn-info btn-lg"%>
-            <%= f.submit "Change password", class: "btn btn-success btn-lg" %>
+            <%= f.submit "Update Profile", class: "btn btn-success btn-lg" %>
           </div>
           <% end %>
 
