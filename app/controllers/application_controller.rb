@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   include Pundit
   protect_from_forgery with: :exception
   helper_method :current_user
+  helper_method :current_order
 
   rescue_from Pundit::NotAuthorizedError do |exception|
     flash[:danger] = "You're not authorized"
@@ -22,6 +23,15 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:id])
   end
   helper_method :current_user
+
+  def current_order
+    if !session[:order_id].nil?
+      Order.find(session[:order_id])
+    else
+      Order.new
+    end
+  end
+  helper_method :current_order
 
 
 end

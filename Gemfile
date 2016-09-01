@@ -45,6 +45,8 @@ gem "pundit"
 group :development do
     gem 'letter_opener'
   end
+  
+gem 'httparty'
 
 gem 'figaro'
 

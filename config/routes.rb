@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+
+
   mount ActionCable.server => '/cable'
 
   root to: 'landing#index'
@@ -21,5 +23,20 @@ Rails.application.routes.draw do
 
   post :upvote, to: 'votes#upvote'
   post :downvote, to: 'votes#downvote'
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+
+  resources :products, only: [:index]
+  resource :cart, only: [:show]
+  resources :order_items, only: [:create, :update, :destroy]
+
+  get 'order_items/create'
+
+  get 'order_items/update'
+
+  get 'order_items/destroy'
+
+  get 'carts/show'
+
+  get 'products/index'
+
+
 end

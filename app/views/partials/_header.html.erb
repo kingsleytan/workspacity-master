@@ -10,6 +10,8 @@
         <ul class="nav navbar-nav navbar-right">
           <li id="About"><%= link_to "About", about_path %></li>
           <li id="Topic"><%= link_to "Topic", topics_path %></li>
+          <li id="Product"><%= link_to "Product", products_index_path %></li>
+          <%= render partial:'partials/cart_text' %>
         </ul>
 
         <ul class="nav navbar-nav navbar-right">
