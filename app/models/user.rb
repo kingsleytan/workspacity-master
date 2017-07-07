@@ -19,7 +19,7 @@ class User < ApplicationRecord
   validates :username, presence: true,
                       uniqueness: true
 
-  privat
+  private
 
   def update_slug
     if username
