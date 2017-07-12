@@ -1,54 +1,35 @@
 <div class="header">
   <nav class="navbar navbar-default">
     <div class="container-fluid">
+
       <div class="navbar-header">
         <%= link_to "Workspacity", root_path, class: "navbar-brand" %>
       </div>
 
-      <div class="collapse navbar-collapse" id="header-dropdown">
 
-        <ul class="nav navbar-nav navbar-right">
-          <li id="About"><%= link_to "About", about_path %></li>
-          <li id="Topic"><%= link_to "Topic", topics_path %></li>
-          <li id="Product"><%= link_to "Product", products_index_path %></li>
-          <%= render partial:'partials/cart_text' %>
-        </ul>
+      <ul class="nav navbar-nav navbar-right">
 
-        <ul class="nav navbar-nav navbar-right">
-
-          <% if current_user %>
-
-          <div class="dropdown">
-            <button class="btn btn-default dropdown-toggle" type="button" id="Account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              My Account
-              <span class="caret"></span>
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a class="pointah" data-toggle="modal" id="User" data-target="#user-edit-modal"><%= "Welcome, #{current_user.username}"%></a> </li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to "Logout", session_path(current_user), method: :delete, class: 'white shadowed link-styling' %></li>
-            </ul>
-          </div>
-
-          <% else %>
-
-          <div class="dropdown">
-            <li class="pointah" type="button" id="Account" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-              My Account
-              <span class="caret"></span>
-            </li>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <li><a class="pointah" data-toggle="modal" id="Register" data-target="#user-create-modal">Register</a></li>
-              <li><a class="pointah" data-toggle="modal" id="Login" data-target="#user-login-modal">Login</a></li>
-              <li role="separator" class="divider"></li>
-              <li><%= link_to "Reset Password", new_password_reset_path, class: 'white shadowed link-styling' %></li>
-
-            </ul>
-          </div>
-
+        <% if current_user %>
+        <li id="Username" class="pointah" data-toggle="modal" id="User" data-target="#user-edit-modal">
+          <%= "Welcome, #{current_user.username}"%>
+        </li>
+        <li><%= link_to "Logout", session_path(current_user), method: :delete, class: 'white shadowed link-styling' %></li>
+        <% else %>
+        <li id="Register" class="pointah" data-toggle="modal" id="Register" data-target="#user-create-modal"> <a>Register</a> </li>
+        <li id="Login" class="pointah" data-toggle="modal" id="Login" data-target="#user-login-modal"><a>Login</a></li>
+        <li id="Reset Password" class="pointah" data-toggle="modal" id="Password Reset" data-target="#password-reset-modal">
+          <a>Reset Password</a></li>
           <% end %>
+          <li id="Topic"><%= link_to "How it Works", how_it_works_path %></li>
+          <li id="Topic"><%= link_to "Journal", topics_path %></li>
+          <li id="About"><%= link_to "About Us", about_path %></li>
+          <li id="Product"><%= link_to "Product", products_index_path %></li>
+
+          <%if current_order.nil? %>
+          <li id="Cart"><%= render partial:'partials/cart_text' %></li>
+          <% end %>
+
         </ul>
       </div>
-    </div>
-  </nav>
-</div>
+    </nav>
+  </div>

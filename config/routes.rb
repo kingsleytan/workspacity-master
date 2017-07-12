@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   root to: 'landing#index'
   get :about, to: 'static_pages#about'
+  get :how_it_works, to: 'static_pages#how_it_works'
   resources :topics, except: [:show] do
     resources :posts do
       resources :comments
