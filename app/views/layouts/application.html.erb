@@ -8,9 +8,17 @@
   <title>Workspacity</title>
   <%= csrf_meta_tags %>
 
+  <% if current_user %>
+    <meta user="<%=current_user.username%>">
+      <% if current_user.admin? || current_user.moderator? %>
+        <meta name="admin">
+    <% end %>
+  <% end %>
+<!--
+
   <% if current_user && (current_user.admin? || current_user.moderator?) %>
   <meta name="wizardwonka">
-  <% end %>
+  <% end %> -->
 
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>

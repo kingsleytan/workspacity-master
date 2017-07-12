@@ -3,12 +3,13 @@ class PostsController < ApplicationController
 
   def index
     @topic = Topic.includes(:posts).friendly.find(params[:topic_id])
-    # @posts = @topic.posts.order("created_at DESC")
-    @posts = Post.all
+
+    @posts = @topic.posts.order("created_at DESC")
+
     if params[:search]
       @posts = Post.search(params[:search]).order("created_at DESC")
     else
-      @posts = Post.all.order('created_at DESC')
+      @posts = @topic.posts.order("created_at DESC")
     end
   end
 
@@ -19,7 +20,7 @@ class PostsController < ApplicationController
 
   def create
     @topic = Topic.friendly.find(params[:topic_id])
-    @post = current_user.posts.build(post_params.merge(topic_id: params[:topic_id]))
+    @post = current_user.posts.build(post_params.merge(topic_id: @topic.id))
 
     if @post.save
       flash[:success] = "You've created a new post."
@@ -60,6 +61,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:image, :title, :body)
+    params.require(:post).permit(:image, :title, :body, :topic_id)
   end
 end

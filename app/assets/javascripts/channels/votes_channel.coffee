@@ -8,7 +8,7 @@ votesChannelFunctions = () ->
       console.log("user logged in votes_channel")
 
     disconnected: () ->
-      console.log("user not logged in")
+      console.log("user not logged in to Vote Channel")
 
     received: (data) ->
       console.log("vote coming")

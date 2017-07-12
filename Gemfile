@@ -46,8 +46,6 @@ group :development do
     gem 'letter_opener'
   end
 
-gem 'masonry-rails'
-
 gem 'httparty'
 
 gem 'figaro'
