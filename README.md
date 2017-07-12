@@ -1,5 +1,7 @@
-# README
+# Workspacity
 
-# MagicForums
-A simple discussion board created by Kingsley Tan during Magic's Full
-Stack Development Bootcamp
+A B2B platform for creative industry.
+
+Visit [our website](http://workspacity.herokuapp.com/).
+
+Created with love by Kingsley Tan
