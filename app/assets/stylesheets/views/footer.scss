@@ -1,0 +1,77 @@
+.footer{
+  .background-5{
+    background-color: #778899;
+    height: 50vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .font-logo{
+    font-family: Open Sans, sans-serif;
+    color: white;
+    font-size: 50px;
+  }
+  .social-media{
+    width: 50px;
+    height: 50px;
+    z-index: 0;
+    float: left;
+    text-align: center;
+    margin: 10px auto;
+    margin-left: 20px;
+  }
+  
+  .social-media-parent{
+    max-width: 1200px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .social-media-child{
+    flex: 0 0 75%;
+  }
+
+  .font-email{
+    font-size: 16px;
+    color: white;
+  }
+
+  .circle{
+    border-radius: 100px;
+    height: 100px;
+    width: 100px;
+    border: 3px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .flex-alignment{
+    display: flex;
+    justify-content: center;
+  }
+
+  @media all and (max-width: 600px){
+    .image{
+      flex: 0 0 100%;
+    }
+    h1{
+      font-size: 50px;
+    }
+    h2{
+      font-size: 30px;
+    }
+    .font-body {
+      font-size: 13px;
+    }
+    .font-email{
+      font-size: 13px;
+    }
+  }
+}
