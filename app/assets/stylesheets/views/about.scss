@@ -10,6 +10,13 @@
     align-items: center;
     justify-content: center;
   }
+  .feature-box{
+    background-color: rgb(246, 246, 246);
+    height: 22vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   h1{
     color: white;
@@ -29,6 +36,29 @@
     font-size: 35px;
     text-align: center;
   }
+  h4{
+    color: #666666;
+    font-size: 24px;
+  }
+  h5{
+    color: black;
+    font-size: 18px;
+  }
+  h6 {
+    color: #666666;
+    font-size: 28px;
+    text-align: center;
+  }
+  h7 {
+    color: #666666;
+    font-size: 20px;
+    font-style: italic;
+    text-align: center;
+  }
+  p{
+    color: black;
+    font-size: 15px;
+  }
 
   .video-box{
     width: 800px;
@@ -41,9 +71,14 @@
     align-items: center;
   }
 
+  .writeup-about{
+    margin: 10px auto;
+    margin-left: 25px;
+    margin-right: 25px;
+  }
+
   .images{
     width: 100%;
-    // margin: 50px auto;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -52,14 +87,11 @@
   }
 
   .image{
-    flex: 0 0 280px;
+    flex: 0 0 33.3%;
+    height: 100%;
     position: relative;
     justify-content: center;
     align-items: center;
-    &:hover .invisible-layout {
-      opacity: 1;
-      transition: all 0.3s ease-in-out;
-    }
   }
   .image-profile{
     flex: 0 0 280px;
@@ -72,7 +104,7 @@
 
   .image-box{
     width:100%;
-    height: 200px;
+    height:100%;
   }
 
   @media all and (max-width: 1199px){
@@ -86,6 +118,7 @@
   @media all and (max-width: 600px){
     .image{
       flex: 0 0 100%;
+      width: 80%;
     }
     h1{
       font-size: 50px;
@@ -93,8 +126,14 @@
     h2{
       font-size: 30px;
     }
-    h3{
+    h3, h4, h5{
       font-size: 20px;
+    }
+    h6{
+      font-size: 20px;
+    }
+    h7{
+      font-size: 13px;
     }
     .font-body {
     font-size: 13px;
