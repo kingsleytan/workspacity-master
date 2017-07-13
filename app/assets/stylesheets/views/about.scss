@@ -60,9 +60,17 @@
     font-size: 15px;
   }
 
+  .flex-alignment{
+    display: flex;
+    justify-content: center;
+  }
+
   .video-box{
     width: 800px;
     height: 450px;
+    margin: 10px auto;
+    margin-left: 25px;
+    margin-right: 25px;
   }
 
   .content-about{
