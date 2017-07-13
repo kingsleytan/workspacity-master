@@ -1,4 +1,4 @@
-.about{
+.how-it-works{
   .background-about {
     background-image: asset-url("aboutbackground.jpg");
     height: 22vh;
@@ -10,12 +10,31 @@
     align-items: center;
     justify-content: center;
   }
+  .background-how-it-works{
+    background-image: asset-url("workspacity-how-it-works.jpg");
+    height: calc(100vh - 52px - 22vh);
+    width: 100%;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 10px auto;
+  }
   .feature-box{
     background-color: rgb(246, 246, 246);
     height: 22vh;
     display: flex;
     align-items: center;
     justify-content: center;
+  }
+  .feature-box-white{
+    background-color: white;
+    height: 22vh;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
   }
 
   h1{
@@ -41,7 +60,7 @@
     font-size: 24px;
   }
   h5{
-    color: black;
+    color: #666666;
     font-size: 18px;
   }
   h6 {
@@ -55,9 +74,24 @@
     font-style: italic;
     text-align: center;
   }
+  h8{
+    color: white;
+    font-size: 38px;
+  }
   p{
     color: black;
     font-size: 15px;
+  }
+
+  .font-1{
+    color: white;
+    font-size: 16px;
+  }
+
+  .add-margin{
+    margin: 10px auto;
+    margin-left: 25px;
+    margin-right: 25px;
   }
 
   .flex-alignment{
@@ -83,6 +117,10 @@
     margin: 10px auto;
     margin-left: 25px;
     margin-right: 25px;
+  }
+
+  .text-left{
+    text-align: left;
   }
 
   .images{
@@ -114,6 +152,23 @@
     height:100%;
   }
 
+  .button {
+    border-radius: 6%;
+    border-color: #666666;
+    color: #555555;
+    text-align: center;
+    font-size: 16px;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  // }
+  // .button:hover {
+  //   background-color: #008CBA;
+  //   color: white;
+  // }
+
   @media all and (max-width: 1199px){
     .image{
       flex: 0 0 50%;
@@ -133,10 +188,7 @@
     h2{
       font-size: 30px;
     }
-    h3, h4, h5{
-      font-size: 20px;
-    }
-    h6{
+    h3, h4, h5, h6, h8{
       font-size: 20px;
     }
     h7{
@@ -148,7 +200,9 @@
     .font-email{
       font-size: 13px;
     }
-
+    .font-1{
+      font-size: 12px;
+    }
     .video-box{
       width: 100%;
     }
